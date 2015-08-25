@@ -8,7 +8,7 @@ var smallestPath = function (pyramid) {
   var expectedPathLength = 1;
   var paths = [];
 
-  var removeDeadPaths = function(arr, length){
+  var removeDeadPaths = function(arr, length) {
     for(var i = 0; i < arr.length; i++) {
       if(!Array.isArray(arr[i]) || arr[i].length < length) {
         arr.splice(i, 1);
@@ -16,7 +16,7 @@ var smallestPath = function (pyramid) {
     }
   };
 
-  var newFork = function(path, newHead){
+  var createNewFork = function(path, newHead) {
     var fork = path.slice();
     fork.shift();
     fork.unshift(newHead);
@@ -28,28 +28,27 @@ var smallestPath = function (pyramid) {
   */
   for(var i = pyramid.length - 1; i; i--) {
     for(var j = 0; j < pyramid[i].length - 1; j++) {
+
       var branchA = pyramid[i][j];
       var branchB = pyramid[i][j + 1];
-      var parent = pyramid[i - 1][j];
+      var parentNode = pyramid[i - 1][j];
 
       if(branchA <= branchB) {
         if(!paths[j]) {
-          paths[j] = [branchA]; //Make new array starting from base of the path.
+          paths[j] = [branchA]; //Make new path array starting from branchA.
         }
-
         if(paths[j].length > expectedPathLength) { //Another path merges into this one, fork a new branch.
-          paths[j + 1] = newFork(paths[j], parent);
+          paths[j + 1] = createNewFork(paths[j], parentNode);
         } else {
-          paths[j].unshift(parent);
+            paths[j].unshift(parentNode);
         }
-        pyramid[i - 1][j] = parseInt(parent) + parseInt(branchA);
+        pyramid[i - 1][j] = parseInt(parentNode) + parseInt(branchA);
       } else {
-        if(!paths[j + 1]) {
-          paths[j + 1] = [branchB]; //Make new array starting from base of the path.
-        }
-
-        paths[j + 1].unshift(parent);
-        pyramid[i - 1][j] = parseInt(parent) + parseInt(branchB);
+          if(!paths[j + 1]) {
+            paths[j + 1] = [branchB]; //Make new path array starting from branchB.
+          }
+          paths[j + 1].unshift(parentNode);
+          pyramid[i - 1][j] = parseInt(parentNode) + parseInt(branchB);
       }
     }
 
