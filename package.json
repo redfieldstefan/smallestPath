@@ -4,15 +4,16 @@
   "description": "Given a randomly generated pyramid of strings representing integers from 1 to 99 (inclusive), find the path from top to bottom that results in the smallest sum.",
   "main": "smallest_path.js",
   "scripts": {
-    "test": "mocha test/"
+    "test": "./node_modules/grunt-cli/bin/grunt test"
   },
   "author": "Stefan Redfield",
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.2.0",
     "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-contrib-watch": "^0.6.1",
-    "mocha": "^2.2.5"
+    "grunt-simple-mocha": "^0.4.0"
   }
 }

@@ -2,6 +2,7 @@ module.exports = function(grunt) {
   'use strict';
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-simple-mocha');
 
   var srcFiles = [ './smallestPath.js', 'Gruntfile.js', './test/*.js' ];
 
@@ -21,8 +22,14 @@ module.exports = function(grunt) {
       ]
     },
 
+    simplemocha:{
+      dev:{
+        src:['./test/**/*test.js']
+      }
+    }
+
   });
 
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('test', ['jshint', 'simplemocha:dev']);
 
 };
