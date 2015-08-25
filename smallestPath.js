@@ -23,6 +23,9 @@ var smallestPath = function (pyramid) {
     return fork;
   };
 
+  /**
+  * loop over pyramid, starting at the bottom level, calculating the minimum sums moving upwards and saving the potential paths to arrive there.
+  */
   for(var i = pyramid.length - 1; i; i--) {
     for(var j = 0; j < pyramid[i].length - 1; j++) {
       var branchA = pyramid[i][j];
@@ -31,20 +34,20 @@ var smallestPath = function (pyramid) {
 
       if(branchA <= branchB) {
         if(!paths[j]) {
-          paths[j] = [branchA]; //Make new array starting from base of the path
+          paths[j] = [branchA]; //Make new array starting from base of the path.
         }
 
-        if(paths[j].length > expectedPathLength) { //Another path merges into this one, fork a new branch
+        if(paths[j].length > expectedPathLength) { //Another path merges into this one, fork a new branch.
           paths[j + 1] = newFork(paths[j], parent);
         } else {
           paths[j].unshift(parent);
         }
         pyramid[i - 1][j] = parseInt(parent) + parseInt(branchA);
-
       } else {
         if(!paths[j + 1]) {
-          paths[j + 1] = [branchB]; //Make new array starting from base of the path
+          paths[j + 1] = [branchB]; //Make new array starting from base of the path.
         }
+
         paths[j + 1].unshift(parent);
         pyramid[i - 1][j] = parseInt(parent) + parseInt(branchB);
       }
@@ -55,19 +58,14 @@ var smallestPath = function (pyramid) {
   }
 
   return {
-    sum: pyramid[0][0],  // TODO: Total sum of the shortest path.
-    path: paths[0]// TODO: Array of items at each level constituting the 'path'.
+    sum: pyramid[0][0],  // Total sum of the shortest path.
+    path: paths[0]// Array of items at each level constituting the 'path'.
   };
 };
 
 module.exports = {
   smallestPath: smallestPath
 };
-
-
-//POSSIBLE PATHS
-//h - height
-//NUMBER OF PYRAMID PATHS = 2(h -1)
 
 //HOW TO ARRIVE AT SUM
 // working bottom up by finding minimum path sums at each level
