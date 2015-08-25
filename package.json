@@ -1,10 +1,14 @@
 {
-  "name": "formidable",
+  "name": "smallestPath",
   "version": "1.0.0",
   "description": "Given a randomly generated pyramid of strings representing integers from 1 to 99 (inclusive), find the path from top to bottom that results in the smallest sum.",
-  "main": "smallest_path.js",
+  "main": "smallestPath.js",
   "scripts": {
     "test": "./node_modules/grunt-cli/bin/grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/redfieldstefan/smallestPath.git"
   },
   "author": "Stefan Redfield",
   "license": "ISC",
